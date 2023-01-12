@@ -1,11 +1,12 @@
 import './App.css';
-import { Menu } from './components/Menu';
+import { AuthProvider } from './context/Auth';
 
 function App({ children }) {
   return (
     <div className="App">
-      <Menu />
-      { children }
+      <AuthProvider>
+        { children }
+      </AuthProvider>
     </div>
   );
 }

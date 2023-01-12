@@ -1,6 +1,7 @@
-import { Project } from './';
+import { Project } from ".";
+import { ProtectedPage } from "../../components/ProtectedPage";
 
 export const ProjectRoute = {
   path: '/project',
-  element: <Project />
+  element: <ProtectedPage><Project /></ProtectedPage>
 };

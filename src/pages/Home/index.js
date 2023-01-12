@@ -1,7 +1,11 @@
+import { Layout } from '../../components/Layout';
+
 export function Home() {
   return (
     <section>
-      <h1>Home</h1>
+      <Layout>
+        <h1>Home</h1>
+      </Layout>
     </section>
   );
 }

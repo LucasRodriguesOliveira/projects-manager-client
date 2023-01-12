@@ -1,4 +1,4 @@
-import { Login } from '.';
+import { Login } from ".";
 
 export const LoginRoute = {
   path: '/login',
