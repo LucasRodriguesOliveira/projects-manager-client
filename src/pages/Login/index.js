@@ -21,39 +21,43 @@ export function Login() {
 
     try {
       await auth.Login(username, password);
+      setToast({
+        message: 'Successful Login',
+        type: 'success'
+      });
     } catch ({ response: { data } }) {
       setToast({
-        show: true,
         message: data.message,
         type: 'error'
       });
     }
+
+    setToast((toast) => ({
+      ...toast,
+      show: true,
+    }));
   }, [auth, username, password]);
 
   useEffect(() => {
     if(auth.signed) {
-      setToast({ show: true, message: 'Successful Login', type: 'success' })
       const timeoutId = setTimeout(() => {
-        setToast({ show: false, message: '', type: '' });
+        navigate('/project');
       }, 3000);
 
-      return () => {
-        navigate('/');
-        return clearTimeout(timeoutId);
-      };
+      return () => clearTimeout(timeoutId);
     }
   }, [auth, navigate]);
 
   useEffect(() => {
-    if(toast.show && !auth.signed) {
-      const intervalId = setInterval(() => {
+    if(toast.show) {
+      const timeoutId = setTimeout(() => {
         setToast({ show: false, message: '', type: '' });
       }, 3000);
 
 
-      return () => clearInterval(intervalId);
+      return () => clearInterval(timeoutId);
     }
-  }, [toast, auth]);
+  }, [toast]);
 
   return (
     <section>

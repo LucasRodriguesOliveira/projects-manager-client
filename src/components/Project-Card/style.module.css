@@ -1,0 +1,99 @@
+.project-item {
+  margin: 10px;
+  min-width: 250px;
+  padding: 16px 16px;
+  background-color: #F8F8F8;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.project-title {
+  width: 100%;
+  padding: 8px 16px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.project-item:not(.done) .project-title {
+  background-color: #4574A8;
+}
+
+.project-item.done {
+  background-color: #dffddf;
+}
+
+.project-item.done .project-title {
+  background-color: #65AF84;
+}
+
+.project-dates {
+  display: flex;
+  padding: 10px;
+  color: grey;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.project-dates * {
+  margin: 5px;
+}
+
+.project-start, .project-deadline {
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  background-color: #CFCFCF;
+}
+
+.project-item.done .project-start,
+.project-item.done .project-deadline {
+  background-color: #cef3dd;
+  color: #65AF84;
+}
+
+.project-cost {
+  width: 100%;
+  text-align: center;
+  margin: 15px 5px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color:rgba(0, 0, 0, 0.7)
+}
+
+.project-actions {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px;
+  padding: 15px;
+}
+
+.project-actions .button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 20px;
+  background-color: #5574B8;
+  cursor: pointer;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15),
+              2px 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+
+.project-actions .button:hover {
+  background-color: #355498;
+}
+
+.project-item.done .button {
+  background-color: #65AF84;
+}
+
+.project-item.done .button:hover {
+  background-color: #559F74;
+}

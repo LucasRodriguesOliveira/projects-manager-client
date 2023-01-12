@@ -1,0 +1,53 @@
+.box {
+  width: 90%;
+  margin: auto;
+  margin-top: 2%;
+}
+
+.projects-box {
+  background-color: #F8F8F8;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15),
+              3px 3px 6px rgba(0, 0, 0, 0.2);
+  padding: 8px;
+}
+
+.projects-title-container {
+  background-color: #4574A8;
+  border-radius: 4px 4px 0 0;
+  padding: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.projects-title, .cancel-button {
+  margin: 5px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  text-decoration: none;
+}
+
+.projects-title {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.projects-title-icon,
+.projects-cancel-icon {
+  font-size: 1.8rem;
+  margin-right: 8px;
+}
+
+.cancel-button {
+  background-color: #cc201a;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.cancel-button:hover {
+  background-color: #a70202;
+}
