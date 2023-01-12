@@ -1,18 +1,35 @@
 import style from './style.module.css';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Input } from '../Input';
 
-export function ProjectForm({ project }) {
-  const [title, setTitle] = useState(project?.title || '');
-  const [zipCode, setZipCode] = useState(project?.zipCode || '');
-  const [cost, setCost] = useState(project?.cost || 0);
-  const [done, setDone] = useState(project?.done || false);
-  const [deadline, setDeadline] = useState(project?.deadline || new Date());
-  const [createdAt] = useState(project?.createdAt || new Date());
+export function ProjectForm({ project, onSubmit, markAsDone }) {
+  const [title, setTitle] = useState('');
+  const [zipCode, setZipCode] = useState('');
+  const [cost, setCost] = useState(0);
+  const [done, setDone] = useState(false);
+  const [deadline, setDeadline] = useState('');
 
   const handleSubmit = useCallback((e) => {
     e.preventDefault();
-  }, []);
+
+    onSubmit({
+      title,
+      zipCode,
+      cost,
+      done,
+      deadline
+    });
+  }, [onSubmit, title, zipCode, cost, done, deadline]);
+
+  useEffect(() => {
+    if(project?.id) {
+      setTitle(project.title);
+      setZipCode(project.zipCode);
+      setCost(project.cost);
+      setDone(project.done);
+      setDeadline(project.deadline);
+    }
+  }, [project]);
 
   return (
     <div className={style.box}>
@@ -36,16 +53,18 @@ export function ProjectForm({ project }) {
           value={cost}
         />
         { !!project?.createdAt &&
-          <Input
-            type='checkbox'
-            placeholder='done'
-            onChange={(value) => {
-              console.log(value);
-              setDone(value);
-            }}
-            required={!!project?.createdAt}
-            value={done}
-          />
+          <>
+            Done
+            <Input
+              type='checkbox'
+              placeholder='done'
+              onChange={(value) => {
+                markAsDone(value);
+                setDone(value);
+              }}
+              value={done}
+            />
+          </>
         }
         <Input
           type='date'

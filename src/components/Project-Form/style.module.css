@@ -32,8 +32,8 @@
 
 .box form input[type='submit'] {
   border: none;
+  background-color: #388B5B;
   border-radius: 4px;
-  background-color: #355874;
   padding: 12px 48px;
   font-size: 1.05rem;
   margin-top: 20px;
@@ -47,5 +47,5 @@
 .box form input[type='submit']:hover {
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2),
               3px 3px 6px rgba(0, 0, 0, 0.35);
-  background-color: #385B77;
+  background-color: #357458;
 }

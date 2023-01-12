@@ -71,6 +71,7 @@
   align-items: center;
   margin: 5px;
   padding: 15px;
+  text-decoration: none;
 }
 
 .project-actions .button {
@@ -84,6 +85,8 @@
               2px 2px 4px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
   transition: all 0.3s;
+  text-decoration: none;
+  color: #1b1b1b;
 }
 
 .project-actions .button:hover {
@@ -92,6 +95,7 @@
 
 .project-item.done .button {
   background-color: #65AF84;
+  text-decoration: none;
 }
 
 .project-item.done .button:hover {

@@ -6,6 +6,7 @@ import { LoginRoute } from './pages/Login/route';
 import { RegisterRoute } from './pages/Register/route';
 import { ProjectRoute } from './pages/Project/route';
 import { NewProjectRoute } from './pages/Project/New-Project/route';
+import { EditProjectRoute } from './pages/Project/Edit-Project/route';
 
 export const router = createBrowserRouter([
   HomeRoute,
@@ -13,4 +14,5 @@ export const router = createBrowserRouter([
   RegisterRoute,
   ProjectRoute,
   NewProjectRoute,
+  EditProjectRoute,
 ]);

@@ -25,6 +25,10 @@ export function Project() {
     }
   }, [projects, fetchProjects]);
 
+  const handleOnRemoveProject = useCallback(async () => {
+    fetchProjects();
+  }, [fetchProjects]);
+
   return (
     <section>
       <Layout>
@@ -43,12 +47,14 @@ export function Project() {
             <div className={style['projects-list']}>
               {projects?.length > 0 && projects.map((project) => (
                 <ProjectCard
+                  id={project.id}
                   key={project.id}
                   title={project.title}
                   cost={project.cost}
                   createdAt={new Date(project.createdAt)}
                   deadline={new Date(project.deadline)}
                   done={project.done}
+                  onRemove={handleOnRemoveProject}
                 />
               ))}
             </div>

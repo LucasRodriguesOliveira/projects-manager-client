@@ -11,7 +11,13 @@ export function Input({
       placeholder={placeholder}
       required={required}
       value={value}
-      onChange={({ target }) => onChange(target.value)}
+      onChange={({ target }) => {
+        if(type === 'checkbox') {
+          onChange(target.checked);
+        }
+
+        onChange(target.value);
+      }}
     ></input>
   );
 }

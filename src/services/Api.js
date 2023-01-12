@@ -16,6 +16,18 @@ class Api {
   async post(path, body) {
     return this.api.post(path, body);
   }
+
+  async delete(path) {
+    return this.api.delete(path);
+  }
+
+  async patch(path, body) {
+    return this.api.patch(path, body);
+  }
+
+  async put(path, body) {
+    return this.api.put(path, body);
+  }
 }
 
 export const API = new Api();
