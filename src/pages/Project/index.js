@@ -1,4 +1,4 @@
-export function Home() {
+export function Project() {
   return (
     <section>
       <h1>Project</h1>

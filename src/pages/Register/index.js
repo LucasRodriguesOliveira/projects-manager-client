@@ -1,4 +1,4 @@
-export function Home() {
+export function Register() {
   return (
     <section>
       <h1>Register</h1>

@@ -1,10 +1,11 @@
 import './App.css';
 import { Menu } from './components/Menu';
 
-function App() {
+function App({ children }) {
   return (
     <div className="App">
       <Menu />
+      { children }
     </div>
   );
 }
