@@ -1,51 +1,55 @@
-import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { API } from "../services/Api";
 import * as Storage from '../services/Storage';
 
 export const AuthContext = createContext({});
+const STORAGE_KEY = {
+  user: 'user',
+};
 
 export const AuthProvider = ({ children }) => {
-  const [userId, setUserId] = useState('');
-  const [signed] = useState(Boolean(userId));
+  const [user, setUser] = useState({ id: '' });
 
-  const Login = useCallback(async (username, password) => {
+  useEffect(() => {
+    const userId = Storage.get(STORAGE_KEY.user);
+
+    if(userId) {
+      setUser({ id: userId });
+      API.api.defaults.headers.userId = userId;
+    }
+  }, []);
+
+  function addUser(id) {
+    setUser({ id });
+    API.api.defaults.headers.userId = id;
+    Storage.add(STORAGE_KEY.user, id, false);
+  }
+
+  async function Login(username, password) {
     const { data } = await API.post('users/login', {
       username,
       password,
     });
 
-    setUserId(data);
-    API.api.defaults.headers.userId = data;
-    Storage.add('user', data, false);
-  }, []);
+    addUser(data);
+  };
 
-  const Register = useCallback(async (user) => {
+  async function Register(user) {
     const { data } = await API.post('users', {
       ...user
     });
 
-    setUserId(data.id);
-    API.api.defaults.headers.userId = data.id;
-    Storage.add('user', data, false);
-  }, []);
+    addUser(data.id);
+  };
 
-  const Logout = useCallback(async () => {
-    setUserId(null);
+  async function Logout() {
+    setUser({ id: '' });
     delete API.api.defaults.headers.userId;
-    Storage.remove('user');
-  }, []);
-
-  useEffect(() => {
-    const user = Storage.get('user');
-
-    if(user) {
-      setUserId(user);
-      API.api.defaults.headers.userId = user;
-    }
-  }, []);
+    Storage.remove(STORAGE_KEY.user);
+  };
 
   return (
-    <AuthContext.Provider value={{ signed, userId, Login, Register, Logout }}>
+    <AuthContext.Provider value={{ signed: Boolean(user.id), user, Login, Register, Logout }}>
       { children }
     </AuthContext.Provider>
   );

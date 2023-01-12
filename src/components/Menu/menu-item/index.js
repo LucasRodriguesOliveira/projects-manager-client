@@ -3,7 +3,14 @@ import style from './style.module.css';
 
 export function MenuItem({
   text,
-  pathTo
+  pathTo,
+  onClick
 }) {
-  return (<Link to={pathTo} className={style['menu-item']}>{ text }</Link>);
+  return (
+    <Link
+      to={pathTo}
+      className={style['menu-item']}
+      onClick={onClick}
+    >{ text }</Link>
+  );
 }

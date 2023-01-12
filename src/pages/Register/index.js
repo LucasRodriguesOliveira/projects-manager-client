@@ -1,5 +1,7 @@
-import { useCallback, useState } from "react";
+import style from './style.module.css';
+import { useCallback, useEffect, useState } from "react";
 import { Layout } from "../../components/Layout";
+import { ToastMessage } from "../../components/ToastMessage";
 import { useAuth } from "../../context/Auth";
 
 export function Register() {
@@ -7,21 +9,57 @@ export function Register() {
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [toast, setToast] = useState({
+    type: '',
+    show: false,
+    message: '',
+  });
 
-  const handleSubmit = useCallback((e) => {
+  const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
 
-    auth.Register({
-      name,
-      username,
-      password,
-    });
+    try {
+      await auth.Register({
+        name,
+        username,
+        password,
+      });
+      setToast({
+        message: 'Account created successfully!',
+        type: 'success',
+      })
+    } catch ({ response: { data } }) {
+      setToast({
+        message: data.message,
+        type: 'warn'
+      });
+    }
+
+    setToast((toast) => ({
+      ...toast,
+      show: true,
+    }));
   }, [auth, name, password, username]);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setToast({
+        type: '',
+        message: '',
+        show: false,
+      });
+    }, 3000);
+
+    return () => clearTimeout(timeoutId);
+  }, [toast]);
 
   return (
     <section>
+      {  toast.show &&
+        <ToastMessage message={toast.message} type={toast.type}/>
+      }
       <Layout>
-        <div>
+        <div className={style.box}>
           <form onSubmit={handleSubmit}>
             <input
               type={'text'}

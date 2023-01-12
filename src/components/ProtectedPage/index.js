@@ -7,7 +7,6 @@ export function ProtectedPage({ children }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(auth);
     if(!auth.signed) {
       navigate('/');
     }
